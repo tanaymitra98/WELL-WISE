@@ -169,4 +169,4 @@ For support or questions, please open an issue in the repository or contact the 
 
 ---
 
-**Developed by Quad.Coders** 🚀 
+**Developed by Quad.Coders** 🚀 # WELL-WISE
