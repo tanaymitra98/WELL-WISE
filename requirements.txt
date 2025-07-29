@@ -1,0 +1,49 @@
+# Core Flask
+flask==2.3.3
+gunicorn
+
+# Template rendering and static file handling
+jinja2
+Werkzeug
+
+# ML & Data Science
+numpy
+pandas
+scikit-learn
+joblib
+
+# For image processing (if you use images)
+pillow
+opencv-python
+
+# For model formats
+tensorflow
+keras
+xgboost
+lightgbm
+catboost
+
+# For handling APIs and JSON
+requests
+
+# For file uploads and security
+python-dotenv
+
+# For scientific computing
+scipy
+matplotlib
+seaborn
+
+# If using PyTorch models
+torch
+torchvision
+torchaudio
+
+# For serialization
+pickle5
+
+# If using cloud storage or Cloudinary
+cloudinary
+
+# For CORS handling if needed
+flask-cors
