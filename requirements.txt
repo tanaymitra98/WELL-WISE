@@ -1,5 +1,5 @@
 # Core Flask
-flask==2.3.3
+flask
 gunicorn
 
 # Template rendering and static file handling
