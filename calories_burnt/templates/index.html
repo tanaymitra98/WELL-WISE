@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calories Burnt Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Spline Background -->
+    <div class="spline-bg">
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.42/build/spline-viewer.js"></script>
+        <spline-viewer url="https://prod.spline.design/UB02L7k5BYFyNecy/scene.splinecode"></spline-viewer>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content">
+        <div class="calorie-container">
+                <h2>Calories Burnt Prediction</h2>
+                <form method="POST" action="/predict">
+                    <label>Gender (0=Female, 1=Male):</label>
+                    <input type="number" name="gender" required><br>
+        
+                    <label>Age:</label>
+                    <input type="number" name="age" required><br>
+        
+                    <label>Height (cm):</label>
+                    <input type="number" name="height" required><br>
+        
+                    <label>Weight (kg):</label>
+                    <input type="number" name="weight" required><br>
+        
+                    <label>Duration (min):</label>
+                    <input type="number" name="duration" required><br>
+        
+                    <label>Heart Rate:</label>
+                    <input type="number" name="heart_rate" required><br>
+        
+                    <label>Body Temp (°C):</label>
+                    <input type="number" step="0.1" name="body_temp" required><br>
+        
+                <button type="submit">Predict</button>
+            </form>
+        
+            {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <p>developed by quad.coders</p>
+        </div>
+    </div>
+</body>
+</html>
