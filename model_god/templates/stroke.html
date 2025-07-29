@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='disease-styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('pulseguard') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to PulseGuard
+        </a>
+        
+        <div class="page-header">
+            <h1>🩸 Stroke Predictor</h1>
+            <p>Assess your stroke risk based on health and lifestyle factors</p>
+        </div>
+        
+        <div class="prediction-form">
+            <div class="form-header">
+                <h2>Enter Your Health Data</h2>
+                <p>Please provide accurate information for the best prediction results</p>
+            </div>
+            
+            <form id="strokeForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="20" max="100" required placeholder="Enter your age">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hypertension">Hypertension</label>
+                        <select id="hypertension" name="hypertension" required>
+                            <option value="">Select option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="heartDisease">Heart Disease</label>
+                        <select id="heartDisease" name="heartDisease" required>
+                            <option value="">Select option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="everMarried">Ever Married</label>
+                        <select id="everMarried" name="everMarried" required>
+                            <option value="">Select option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="workType">Work Type</label>
+                        <select id="workType" name="workType" required>
+                            <option value="">Select work type</option>
+                            <option value="0">Private</option>
+                            <option value="1">Self-employed</option>
+                            <option value="2">Govt_job</option>
+                            <option value="3">Children</option>
+                            <option value="4">Never_worked</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="residenceType">Residence Type</label>
+                        <select id="residenceType" name="residenceType" required>
+                            <option value="">Select residence type</option>
+                            <option value="1">Urban</option>
+                            <option value="0">Rural</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="avgGlucoseLevel">Average Glucose Level (mg/dL)</label>
+                        <input type="number" id="avgGlucoseLevel" name="avgGlucoseLevel" min="50" max="300" step="0.1" required placeholder="Enter glucose level">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bmi">BMI (Body Mass Index)</label>
+                        <input type="number" id="bmi" name="bmi" min="10" max="70" step="0.1" required placeholder="Enter BMI">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smokingStatus">Smoking Status</label>
+                        <select id="smokingStatus" name="smokingStatus" required>
+                            <option value="">Select smoking status</option>
+                            <option value="0">Never smoked</option>
+                            <option value="1">Formerly smoked</option>
+                            <option value="2">Smokes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="predict-btn">
+                        <i class="fas fa-brain"></i> Predict Stroke Risk
+                    </button>
+                    <button type="reset" class="reset-btn">
+                        <i class="fas fa-redo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="resultContainer" class="result-container">
+            <h3 id="resultTitle"></h3>
+            <div class="result-text" id="resultText"></div>
+            <div class="disclaimer">
+                <strong>⚠️ Disclaimer:</strong> This prediction is for educational purposes only and should not replace professional medical advice. Always consult with a healthcare provider for proper diagnosis and treatment.
+            </div>
+        </div>
+    </div>
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .result-section {
+            margin-top: 30px;
+        }
+        
+        .result-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .result-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .disclaimer {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('pulseguard') }}" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to PulseGuard
+    </a>
+    
+    <div class="container">
+        <header class="glass glow-hover float">
+            <h1 class="scroll-reveal text-glow">🩸 Stroke Predictor</h1>
+            <p class="scroll-reveal">Enter your health information to assess stroke risk</p>
+        </header>
+        
+        <main>
+            <form class="prediction-form glass scroll-reveal" id="strokeForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="0">Female</option>
+                            <option value="1">Male</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="18" max="120" placeholder="Age in years" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hypertension">Hypertension</label>
+                        <select id="hypertension" name="hypertension" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="heart_disease">Heart Disease</label>
+                        <select id="heart_disease" name="heart_disease" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ever_married">Ever Married</label>
+                        <select id="ever_married" name="ever_married" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="work_type">Work Type</label>
+                        <select id="work_type" name="work_type" required>
+                            <option value="">Select work type</option>
+                            <option value="0">Private</option>
+                            <option value="1">Self-employed</option>
+                            <option value="2">Government</option>
+                            <option value="3">Children</option>
+                            <option value="4">Never worked</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="residence_type">Residence Type</label>
+                        <select id="residence_type" name="residence_type" required>
+                            <option value="">Select residence type</option>
+                            <option value="0">Rural</option>
+                            <option value="1">Urban</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="avg_glucose_level">Average Glucose Level (mg/dl)</label>
+                        <input type="number" id="avg_glucose_level" name="avg_glucose_level" step="0.1" min="50" max="300" placeholder="Average glucose level" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bmi">BMI</label>
+                        <input type="number" id="bmi" name="bmi" step="0.1" min="10" max="60" placeholder="Body Mass Index" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smoking_status">Smoking Status</label>
+                        <select id="smoking_status" name="smoking_status" required>
+                            <option value="">Select smoking status</option>
+                            <option value="0">Never smoked</option>
+                            <option value="1">Formerly smoked</option>
+                            <option value="2">Smokes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-actions scroll-reveal">
+                    <button type="submit" class="predict-btn">Predict Stroke Risk</button>
+                    <button type="reset" class="reset-btn">Clear Form</button>
+                </div>
+            </form>
+            
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="result-container animated">
+                    <div class="result-content">
+                        <h3>Prediction Result</h3>
+                        <p class="result-text" id="resultText"></p>
+                    </div>
+                </div>
+                <div class="disclaimer">
+                    <p><strong>Disclaimer:</strong> This prediction is for educational purposes only and should not replace professional medical advice. Please consult with a healthcare provider for accurate diagnosis and treatment.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        document.getElementById('strokeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/predict/stroke', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    document.getElementById('resultText').textContent = data.prediction;
+                    document.getElementById('resultSection').style.display = 'block';
+                    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while making the prediction.');
+            });
+        });
+    </script>
+</body>
+</html> 

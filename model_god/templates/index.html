@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            doc parser
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.42/build/spline-viewer.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body class="container">
+        
+        <div class="header">
+            <div>WellWise</div>
+        </div>
+        
+        <!-- Spline Scene -->
+        <div class="spline-container">
+            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.42/build/spline-viewer.js"></script>
+            <spline-viewer url="https://prod.spline.design/cHQO-Kc60YQ5jAxD/scene.splinecode"></spline-viewer>
+            <div class="footer">
+                <p>Designed by Quad.Coders</p>
+            </div>
+        </div>
+
+        
+
+        
+        <div class="under-header">
+            Extract, analyze, and convert any document format with powerful AI-driven parsing technology
+        </div>
+       
+
+
+        <div class="cards-container">
+            <a href="{{ url_for('calories_burnt') }}">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-fire"></i></div>
+                    <div class="card-title">Calories Burnt Prediction</div>
+                    <div class="card-content">Predict calories burned during exercise based on your metrics</div>
+                </div>
+            </a>
+            <a href="{{ url_for('pulseguard') }}">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                    <div class="card-title">PulseGuard</div>
+                    <div class="card-content">AI-powered health disease prediction and analysis</div>
+                </div>
+            </a>
+            <a href="{{ url_for('fitness_plan') }}">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-dumbbell"></i></div>
+                    <div class="card-title">Fitness Plan Generator</div>
+                    <div class="card-content">Get personalized workout plans based on your goals</div>
+                </div>
+            </a>
+            <a href="#" class="coming-soon">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="card-title">Universal</div>
+                    <div class="card-content">Coming soon: Handle any document format</div>
+                </div>
+            </a>
+        </div>
+
+
+    </body>
+</html>

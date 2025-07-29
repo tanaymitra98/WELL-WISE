@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseGuard - Health Disease Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pulseguard-styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div id="parallax-bg" class="parallax-element"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <header class="glass glow-hover float">
+                <h1 class="scroll-reveal">PULSE GUARD</h1>
+                <h2 class="motto">Predict Early, Treat Smartly</h2>
+                <p class="scroll-reveal">Empowering you with AI-driven health insights for better tomorrow</p>
+            </header>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="back-btn glow-hover">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+    
+    <!-- Diseases Section -->
+    <div class="diseases-wrapper">
+        <div class="container">
+            <section class="diseases-section scroll-reveal parallax-element">
+                <div class="diseases-container">
+                    <h2 class="scroll-reveal">Diseases We Can Predict</h2>
+                    <div class="diseases-grid">
+                        <a href="{{ url_for('diabetes') }}" class="disease-card active glass glow-hover scroll-reveal" style="text-decoration: none; color: inherit;">
+                            <div class="disease-icon float">💉</div>
+                            <h3>Diabetes</h3>
+                            <p>Type 2 diabetes risk assessment based on glucose levels, BMI, age, and family history</p>
+                            <div class="features">
+                                <span class="feature">✓ Glucose Analysis</span>
+                                <span class="feature">✓ BMI Assessment</span>
+                                <span class="feature">✓ Age Factor</span>
+                            </div>
+                        </a>
+                        
+                        <a href="{{ url_for('heart') }}" class="disease-card active glass glow-hover scroll-reveal" style="text-decoration: none; color: inherit;">
+                            <div class="disease-icon float">❤️</div>
+                            <h3>Heart Disease</h3>
+                            <p>Cardiovascular risk evaluation using chest pain, cholesterol, and blood pressure data</p>
+                            <div class="features">
+                                <span class="feature">✓ Chest Pain Analysis</span>
+                                <span class="feature">✓ Cholesterol Check</span>
+                                <span class="feature">✓ Blood Pressure</span>
+                            </div>
+                        </a>
+                        
+                        <a href="{{ url_for('lung') }}" class="disease-card active glass glow-hover scroll-reveal" style="text-decoration: none; color: inherit;">
+                            <div class="disease-icon float">🫁</div>
+                            <h3>Lung Cancer</h3>
+                            <p>Respiratory health assessment and lung cancer risk evaluation</p>
+                            <div class="features">
+                                <span class="feature">✓ Age Analysis</span>
+                                <span class="feature">✓ Smoking History</span>
+                                <span class="feature">✓ Area Quality</span>
+                                <span class="feature">✓ Alcohol Consumption</span>
+                            </div>
+                        </a>
+                        
+                        <a href="{{ url_for('stroke') }}" class="disease-card active glass glow-hover scroll-reveal" style="text-decoration: none; color: inherit;">
+                            <div class="disease-icon float">🩸</div>
+                            <h3>Stroke</h3>
+                            <p>Cerebrovascular risk assessment and stroke prevention analysis</p>
+                            <div class="features">
+                                <span class="feature">✓ Blood Pressure</span>
+                                <span class="feature">✓ Glucose Levels</span>
+                                <span class="feature">✓ Heart Disease</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <script>
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html> 
